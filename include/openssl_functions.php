@@ -99,11 +99,9 @@ authorityKeyIdentifier=keyid:always,issuer:always
 [ root_ext ]
 basicConstraints       = CA:true
 keyUsage               = cRLSign, keyCertSign
-nsCertType             = sslCA, emailCA, objCA
 subjectKeyIdentifier   = hash
 subjectAltName         = email:copy
 crlDistributionPoints  = URI:$config[base_url]index.php?stage=dl_crl
-nsComment              = \"PHPki/OpenSSL Generated Root Certificate\"
 #nsCaRevocationUrl      = ns_revoke_query.php?
 nsCaPolicyUrl          = $config[base_url]policy.html
 
@@ -111,13 +109,11 @@ nsCaPolicyUrl          = $config[base_url]policy.html
 basicConstraints       = critical, CA:false
 keyUsage               = critical, nonRepudiation, digitalSignature, keyEncipherment
 extendedKeyUsage       = critical, emailProtection, clientAuth
-nsCertType             = critical, client, email
 subjectKeyIdentifier   = hash
 authorityKeyIdentifier = keyid:always, issuer:always
 subjectAltName         = email:copy
 issuerAltName          = issuer:copy
 crlDistributionPoints  = URI:$config[base_url]index.php?stage=dl_crl
-nsComment              = \"PHPki/OpenSSL Generated Personal Certificate\"
 nsBaseUrl              = $config[base_url]
 nsRevocationUrl        = ns_revoke_query.php?
 nsCaPolicyUrl          = $config[base_url]policy.html
@@ -126,13 +122,11 @@ nsCaPolicyUrl          = $config[base_url]policy.html
 basicConstraints       = critical, CA:false
 keyUsage               = critical, nonRepudiation, digitalSignature, keyEncipherment
 extendedKeyUsage       = critical, emailProtection, clientAuth, codeSigning
-nsCertType             = critical, client, email
 subjectKeyIdentifier   = hash
 authorityKeyIdentifier = keyid:always, issuer:always
 subjectAltName         = email:copy
 issuerAltName          = issuer:copy
 crlDistributionPoints  = URI:$config[base_url]index.php?stage=dl_crl
-nsComment              = \"PHPki/OpenSSL Generated Personal Certificate\"
 nsBaseUrl              = $config[base_url]
 nsRevocationUrl        = ns_revoke_query.php?
 nsCaPolicyUrl          = $config[base_url]policy.html
@@ -140,14 +134,12 @@ nsCaPolicyUrl          = $config[base_url]policy.html
 [ server_ext ]
 basicConstraints        = critical, CA:false
 keyUsage                = critical, digitalSignature, keyEncipherment
-nsCertType              = critical, server
 extendedKeyUsage        = critical, serverAuth
 subjectKeyIdentifier    = hash
 authorityKeyIdentifier  = keyid:always, issuer:always
 subjectAltName          = DNS:$common_name,email:copy
 issuerAltName           = issuer:copy
 crlDistributionPoints   = URI:$config[base_url]index.php?stage=dl_crl
-nsComment               = \"PHPki/OpenSSL Generated Server Certificate\"
 nsBaseUrl               = $config[base_url]
 nsRevocationUrl         = ns_revoke_query.php?
 nsCaPolicyUrl           = $config[base_url]policy.html
@@ -161,7 +153,6 @@ authorityKeyIdentifier = keyid:always, issuer:always
 subjectAltName         = DNS:$common_name,email:copy
 issuerAltName          = issuer:copy
 crlDistributionPoints   = URI:$config[base_url]index.php?stage=dl_crl
-nsComment              = \"PHPki/OpenSSL Generated Time Stamping Certificate\"
 nsBaseUrl              = $config[base_url]
 nsRevocationUrl        = ns_revoke_query.php?
 
@@ -169,7 +160,6 @@ nsRevocationUrl        = ns_revoke_query.php?
 basicConstraints        = critical, CA:false
 keyUsage                = critical, digitalSignature
 extendedKeyUsage        = critical, clientAuth
-nsCertType              = critical, client
 subjectKeyIdentifier    = hash
 authorityKeyIdentifier  = keyid:always, issuer:always
 subjectAltName          = DNS:$common_name,email:copy
@@ -178,7 +168,6 @@ subjectAltName          = DNS:$common_name,email:copy
 basicConstraints        = critical, CA:false
 keyUsage                = critical, digitalSignature, keyEncipherment
 extendedKeyUsage        = critical, serverAuth
-nsCertType              = critical, server
 subjectKeyIdentifier    = hash
 authorityKeyIdentifier  = keyid:always, issuer:always
 subjectAltName          = DNS:$common_name,email:copy
@@ -187,7 +176,6 @@ subjectAltName          = DNS:$common_name,email:copy
 basicConstraints        = critical, CA:false
 keyUsage                = critical, digitalSignature, keyEncipherment
 extendedKeyUsage        = critical, serverAuth, clientAuth
-nsCertType              = critical, server, client
 subjectKeyIdentifier    = hash
 authorityKeyIdentifier  = keyid:always, issuer:always
 subjectAltName          = DNS:$common_name,email:copy
