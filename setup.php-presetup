@@ -112,10 +112,10 @@ case 'validate':
         if ( $email && ! is_email($contact) )
                 $er .= 'E-mail address ('. htvar($contact) . ') may be invalid.<br>';
 
-	if (strpos($store_dir,$_SERVER['DOCUMENT_ROOT']) === 0)
+	if (strpos($store_dir."/",$_SERVER['DOCUMENT_ROOT']."/") === 0)
 		$er .= 'Store directory must exist somewhere outside of DOCUMENT_ROOT ('.$_SERVER['DOCUMENT_ROOT'].').<br>';
 
-	if (strpos($store_dir,dirname($_SERVER['SCRIPT_FILENAME'])) === 0)
+	if (strpos($store_dir."/",dirname($_SERVER['SCRIPT_FILENAME'])."/") === 0)
 		$er .= 'Store directory cannot exist within the PHPki installation directory ('.dirname($_SERVER['SCRIPT_FILENAME']).').<br>';
 
 	if (! $er) {
