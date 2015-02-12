@@ -457,7 +457,7 @@ EOS;
 
 	$config_txt2 = <<< EOS
 [ req ]
-default_bits		= 1024
+default_bits		= 2048
 default_keyfile		= privkey.pem
 distinguished_name	= req_name
 string_mask		= nombstr
@@ -496,7 +496,7 @@ EOS;
 
 	$config_txt3 = <<< EOS
 [ req ]
-default_bits		= 1024
+default_bits		= 2048
 default_keyfile		= privkey.pem
 distinguished_name	= req_name
 string_mask		= nombstr
