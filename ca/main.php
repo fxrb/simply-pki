@@ -15,7 +15,7 @@ case 'dl_root':
 	break;
 
 case 'dl_crl':
-	upload("$config[cacrl_der]", "$config[ca_prefix]cacrl.crl", 'application/pkix-crl');
+	upload("$config[cacrl_pem]", "$config[ca_prefix]cacrl.crl.pem", 'application/pkix-crl');
 	break;
 
 case 'gen_crl':
