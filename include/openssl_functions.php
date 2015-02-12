@@ -303,10 +303,10 @@ function CAdb_explode_entry($dbentry) {
 	}
 
 	sscanf(CA_cert_startdate($a[3]),"%s %s %s %s", $mm,$dd,$tt,$yy);
-	$db['issued'] = strftime("%y-%b-%d", strtotime("$dd $mm $yy"));
+	$db['issued'] = strftime("%Y-%b-%d", strtotime("$dd $mm $yy"));
 
-	sscanf($a[1], "%2s%2s%2s",$yy,$mm,$dd);
-	$db['expires'] = strftime("%y-%b-%d", strtotime("$mm/$dd/$yy"));
+	sscanf($a[1], "%4s%2s%2s",$yy,$mm,$dd);
+	$db['expires'] = strftime("%Y-%b-%d", strtotime("$mm/$dd/$yy"));
 
 	if (time() > strtotime("$mm/$dd/$yy"))
 		$db['status'] = "Expired";
