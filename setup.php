@@ -740,7 +740,7 @@ E-mail: <a href=mailto:someone@somewhere.com>someone@somewhere.com</a>&nbsp;&nbs
 	<td><select name=expiry>
 
 	<?
-        for ( $i = 5 ; $i < 20 ; $i+=5 ) {
+        for ( $i = 5 ; $i < 105 ; $i+=5 ) {
                 print "<option value=$i " . ($expiry == $i ? "selected='selected
 '" : "") . " >$i Years</option>\n" ;
         }
