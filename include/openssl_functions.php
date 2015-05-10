@@ -305,7 +305,14 @@ function CAdb_explode_entry($dbentry) {
 	sscanf(CA_cert_startdate($a[3]),"%s %s %s %s", $mm,$dd,$tt,$yy);
 	$db['issued'] = strftime("%Y-%b-%d", strtotime("$dd $mm $yy"));
 
-	sscanf($a[1], "%4s%2s%2s",$yy,$mm,$dd);
+	if (strlen($a[1]) <= 13) {
+	   // date in database 'index.txt' stored in UTC format (2 digit year)
+	   sscanf($a[1], "%2s%2s%2s",$yy,$mm,$dd);
+	}
+	else {
+	   // date in database 'index.txt' stored in generalized format (4 digit year)
+	   sscanf($a[1], "%4s%2s%2s",$yy,$mm,$dd);
+	}
 	$db['expires'] = strftime("%Y-%b-%d", strtotime("$mm/$dd/$yy"));
 
 	if (time() > strtotime("$mm/$dd/$yy"))
