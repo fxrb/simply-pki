@@ -200,18 +200,18 @@ function CAdb_to_array($search = '.*') {
 	global $config;
 
 	# Prepend a default status to search string if missing.
-	if (! ereg('^\^\[.*\]', $search)) $search = '^[VRE].*'.$search;
+	if (! preg_match('/^\^\[.*\]/', $search)) $search = '^[VRE].*'.$search;
 
 	# Include valid certs?
-	if (ereg('^\^\[.*V.*\]',$search)) $inclval = true;
+	if (preg_match('/^\^\[.*V.*\]/',$search)) $inclval = true;
 	# Include revoked certs?
-	if (ereg('^\^\[.*R.*\]',$search)) $inclrev = true;
+	if (preg_match('/^\^\[.*R.*\]/',$search)) $inclrev = true;
 	# Include expired certs?
-	if (ereg('^\^\[.*E.*\]',$search)) $inclexp = true;
+	if (preg_match('/^\^\[.*E.*\]/',$search)) $inclexp = true;
 
 	# There isn't really a status of 'E' in the openssl index.
 	# Change (E)xpired to (V)alid within the search string.
-	$search = ereg_replace('^(\^\[.*)E(.*\])','\\1V\\2',$search);
+	$search = preg_replace('/^(\^\[.*)E(.*\])/','\\1V\\2',$search);
 
 	$db = array();
 	exec('egrep -i '.escshellarg($search).' '.$config['index'], $x);
@@ -397,7 +397,7 @@ function CA_cert_subject($serial) {
 //
 function CA_cert_cname($serial) {
 	global $config;
-	return(ereg_replace('^.*/CN=(.*)/.*','\\1',CA_cert_subject($serial)));
+	return(preg_replace('/^.*CN=(.*).*/','\\1',CA_cert_subject($serial)));
 }
 
 //
@@ -743,25 +743,25 @@ function CA_cert_type($serial) {
 
 	$certtext = CA_cert_text($serial);
 
-	if (ereg('OpenSSL.* (E.?mail|Personal) .*Certificate', $certtext) && ereg('Code Signing', $certtest)) {
+	if (preg_match('OpenSSL.* (E.?mail|Personal) .*Certificate', $certtext) && ereg('Code Signing', $certtest)) {
 		$cert_type = 'email_signing';
 	}
-	if (ereg('OpenSSL.* (E.?mail|Personal) .*Certificate', $certtext)) {
+	if (preg_match('OpenSSL.* (E.?mail|Personal) .*Certificate', $certtext)) {
 		$cert_type = 'email';
 	}
-	elseif (ereg('OpenSSL.* Server .*Certificate', $certtext)) {
+	elseif (preg_match('OpenSSL.* Server .*Certificate', $certtext)) {
 		$cert_type = 'server';
 	}
-	elseif (ereg('timeStamping|Time Stamping', $certtext)) {
+	elseif (preg_match('timeStamping|Time Stamping', $certtext)) {
 		$cert_type = 'time_stamping';
 	}
-	elseif (ereg('TLS Web Client Authentication', $certtext) && ereg('TLS Web Server Authentication', $certtext)) {
+	elseif (preg_match('TLS Web Client Authentication', $certtext) && ereg('TLS Web Server Authentication', $certtext)) {
 		$cert_type = 'vpn_client_server';
 	}
-	elseif (ereg('TLS Web Client Authentication', $certtext)) {
+	elseif (preg_match('TLS Web Client Authentication', $certtext)) {
 		$cert_type = 'vpn_client';
 	}
-	elseif (ereg('TLS Web Server Authentication', $certtext)) {
+	elseif (preg_match('TLS Web Server Authentication', $certtext)) {
 		$cert_type = 'vpn_server';
 	}
 	else {

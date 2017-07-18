@@ -21,7 +21,7 @@ if ($stage == "search" && ! $search) $stage = "";
 if ( !($show_valid.$show_revoked.$show_expired) ) $show_valid = 'V';
 
 switch ($stage) {
-case display:
+case 'display':
 	printHeader('about');
 
 	print '
@@ -39,7 +39,7 @@ case 'download':
 	upload("$config[cert_dir]/$serial.der", "$rec[common_name] ($rec[email]).cer", 'application/pkix-cert');
         break;
 
-case search:
+case 'search':
 	printHeader('public');
 
 	$db = CAdb_to_array("^[${show_valid}${show_revoked}${show_expired}].*$search");

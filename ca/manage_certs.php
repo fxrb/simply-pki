@@ -347,10 +347,10 @@ default:
 
 	print '<tr>';
 	$headings = array(
-		status=>"Status", issued=>"Issued", expires=>"Expires",
-		common_name=>"User's Name", email=>"E-mail", 
-		organization=>"Organization", unit=>"Department", 
-		locality=>"Locality"
+		'status'=>"Status", 'issued'=>"Issued", 'expires'=>"Expires",
+		'common_name'=>"User's Name", 'email'=>"E-mail", 
+		'organization'=>"Organization", 'unit'=>"Department", 
+		'locality'=>"Locality"
 	);
 
 	foreach($headings as $field=>$head) {
@@ -376,30 +376,30 @@ default:
 
 	$db = csort(CAdb_to_array($x), $sortfield, ($ascdec=='A'?SORT_ASC:SORT_DESC));
 
-	$stcolor = array(Valid=>'green',Revoked=>'red',Expired=>'orange');
+	$stcolor = array('Valid'=>'green','Revoked'=>'red','Expired'=>'orange');
 
 	foreach($db as $rec) {
 		print	'<tr style="font-size: 11px;">
-			 <td><font color='.$stcolor[$rec['status']].'><b>' .$rec[status].'</b></font></td>
-			 <td style="white-space: nowrap">'.$rec[issued].'</td>
-			 <td style="white-space: nowrap">'.$rec[expires].'</td>
-			 <td>'.$rec[common_name].'</td>
+			 <td><font color='.$stcolor[$rec['status']].'><b>' .$rec['status'].'</b></font></td>
+			 <td style="white-space: nowrap">'.$rec['issued'].'</td>
+			 <td style="white-space: nowrap">'.$rec['expires'].'</td>
+			 <td>'.$rec['common_name'].'</td>
 			 <td style="white-space: nowrap"><a href="mailto:' . htvar($rec['common_name']) . ' <' . htvar($rec['email']) . '>" >' . htvar($rec['email']) . '</a></td>
-			 <td>'.htvar($rec[organization]).'</td>
-			 <td>'.htvar($rec[unit]).'</td>
-			 <td>'.htvar($rec[locality]).'</td>
-			 <td><a href="'.$PHP_SELF.'?stage=display&serial='.$rec[serial].'" target=_certdisp>'.
+			 <td>'.htvar($rec['organization']).'</td>
+			 <td>'.htvar($rec['unit']).'</td>
+			 <td>'.htvar($rec['locality']).'</td>
+			 <td><a href="'.$PHP_SELF.'?stage=display&serial='.$rec['serial'].'" target=_certdisp>'.
 			 '<img src=../images/display.png alt="Display" title="Display complete certificate details."></a>';
 
 		if ($rec['status'] == 'Valid') {
 			print '
-			<a href="'.$PHP_SELF.'?stage=dl-confirm&serial='.$rec[serial].'&'.$qstr_sort.'&'.$qstr_filter.'">'.
+			<a href="'.$PHP_SELF.'?stage=dl-confirm&serial='.$rec['serial'].'&'.$qstr_sort.'&'.$qstr_filter.'">'.
 			'<img src=../images/download.png alt="Download" title="Download the PRIVATE certificate. DO NOT DISTRIBUTE THIS TO THE PUBLIC!"></a>
-			<a href="'.$PHP_SELF.'?stage=revoke-form&serial='.$rec[serial].'&'.$qstr_sort.'&'.$qstr_filter.'">'.
+			<a href="'.$PHP_SELF.'?stage=revoke-form&serial='.$rec['serial'].'&'.$qstr_sort.'&'.$qstr_filter.'">'.
 			'<img src=../images/revoke.png alt="Revoke" title="Revoke the certificate when the e-mail address is no longer valid or the certificate password or private key has been compromised."></a>';
 		}
 		print '
-		<a href="'.$PHP_SELF.'?stage=renew-form&serial='.$rec[serial].'&'.$qstr_sort.'&'.$qstr_filter.'">'.
+		<a href="'.$PHP_SELF.'?stage=renew-form&serial='.$rec['serial'].'&'.$qstr_sort.'&'.$qstr_filter.'">'.
 		'<img src=../images/renew.png alt="Renew" title="Renew the certificate by revoking it, if necessary, and creating a replacement with a new expiration date."></a></td></tr>';
 		
 	}
