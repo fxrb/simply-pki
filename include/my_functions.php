@@ -66,7 +66,6 @@ function gpvar($v) {
     $x = "";
 	if (isset($_GET[$v]))  $x = $_GET[$v];
 	if (isset($_POST[$v])) $x = $_POST[$v];
-	if (get_magic_quotes_gpc()) $x = stripslashes($x);
 	return $x;
 }
 
@@ -133,27 +132,6 @@ function stripslashes_array(&$a) {
 	}
 	else {
 		$a = stripslashes($a);
-	}
-}
-
-
-#
-# Don't use this.
-#
-function undo_magic_quotes(&$a) {
-	if(get_magic_quotes_gpc()) {
-		global $HTTP_POST_VARS, $HTTP_GET_VARS;
-
-		foreach($HTTP_POST_VARS as $k => $v) {
-			stripslashes_array($HTTP_POST_VARS[$k]);
-			global $$k;
-			stripslashes_array($$k);
-		}
-		foreach($HTTP_GET_VARS as $k => $v) {
-			stripslashes_array($HTTP_GET_VARS[$k]);
-			global $$k;
-			stripslashes_array($$k);
-		}
 	}
 }
 
