@@ -121,8 +121,8 @@ case 'revoke-form':
        	<table width=500><tr>
        	<td width=25% style='white-space: nowrap'>
        	<p align=right>
-	Serial Number<br>
-       	User's Name<br>
+        Serial Number<br>
+        User&apos;s Name<br>
        	Email Address<br>
        	Organization<br>
        	Department/Unit<br>
@@ -134,14 +134,14 @@ case 'revoke-form':
 
 	print '
        	<td>
-	'.htvar($rec[serial]).'<br>
-       	'.htvar($rec[common_name]).'<br>
-       	'.htvar($rec[email]).'<br>
-       	'.htvar($rec[organization]).'<br>
-       	'.htvar($rec[unit]).'<br>
-       	'.htvar($rec[locality]).'<br>
-       	'.htvar($rec[province]).'<br>
-       	'.htvar($rec[country]).'<br>
+					'.htvar($rec['serial']).'<br>
+					'.htvar($rec['common_name']).'<br>
+					'.htvar($rec['email']).'<br>
+					'.htvar($rec['organization']).'<br>
+					'.htvar($rec['unit']).'<br>
+					'.htvar($rec['locality']).'<br>
+					'.htvar($rec['province']).'<br>
+					'.htvar($rec['country']).'<br>
        	</td>
        	</tr></table>
 	<h4>Are you sure?</h4>
