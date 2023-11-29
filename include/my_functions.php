@@ -160,7 +160,7 @@ function is_alnum($v) {
 # Returns TRUE if argument is in proper e-mail address format.
 #
 function is_email($v) {
-	return (eregi('^[^@ ]+\@[^@ ]+\.[A-Z]{2,4}$',$v) ? true : false);
+	return (preg_match('/^[^@ ]+\@[^@ ]+\.[A-Z]{2,4}$/i',$v) ? true : false);
 }
 
 #
