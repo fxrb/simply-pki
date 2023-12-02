@@ -109,7 +109,7 @@ case 'validate':
 	if ( $passwd and $passwd != $passwdv )
 		$er .= 'Password and password verification do not match.<br>';
 
-        if ( $email && ! is_email($contact) )
+        if ( isset($email) && ! is_email($contact) )
                 $er .= 'E-mail address ('. htvar($contact) . ') may be invalid.<br>';
 
 	if (strpos($store_dir."/",$_SERVER['DOCUMENT_ROOT']."/") === 0)
@@ -623,25 +623,25 @@ EOS;
 	break;
 
 default:
-	if (! $country) $country = $config['country'];
-	if (! $province) $province = $config['province'];
-	if (! $locality) $locality = $config['locality'];
-	if (! $organization) $organization = $config['organization'];
-	if (! $contact) $contact = $config['contact'];
-	if (! $expiry) $expiry = $config['expiry'];
+	if (! $country && isset($config)) $country = $config['country'];
+	if (! $province && isset($config)) $province = $config['province'];
+	if (! $locality && isset($config)) $locality = $config['locality'];
+	if (! $organization && isset($config)) $organization = $config['organization'];
+	if (! $contact && isset($config)) $contact = $config['contact'];
+	if (! $expiry && isset($config)) $expiry = $config['expiry'];
 	if (! $expiry) $expiry = 10;
-	if (! $keysize) $keysize = $config['keysize'];
+	if (! $keysize && isset($config)) $keysize = $config['keysize'];
 	if (! $keysize) $keysize = 1024;
-	if (! $passwd) $passwd = $config['ca_pwd'];
+	if (! $passwd && isset($config)) $passwd = $config['ca_pwd'];
 	if (! $passwdv) $passwdv = $passwd;
 
-	if (! $unit) $unit = $config['unit'];
+	if (! $unit && isset($config)) $unit = $config['unit'];
 	if (! $unit) $unit = "Certificate Authority";
 
-	if (! $common_name) $common_name = $config['common_name'];
+	if (! $common_name && isset($config)) $common_name = $config['common_name'];
 	if (! $common_name) $common_name = "PHPki Certificate Authority";
 
-	if (! $getting_help) $getting_help = $config['getting_help'];
+	if (! $getting_help && isset($config)) $getting_help = $config['getting_help'];
 	if (! $getting_help) $getting_help = '
 <b>Contact:</b><br>
 First-Name Last-Name<br>
@@ -655,18 +655,18 @@ E-mail: <a href=mailto:someone@somewhere.com>someone@somewhere.com</a>&nbsp;&nbs
 
 	if (! $store_dir) $store_dir = dirname($_SERVER['DOCUMENT_ROOT']).'/phpki-store';
 
-	if (! $base_url) $base_url = $config['base_url'];
+	if (! $base_url && isset($config)) $base_url = $config['base_url'];
 	if (! $base_url) $base_url = 'http://www.somewhere.com/phpki/';
 
-	if (! $ca_prefix) $ca_prefix = $config['ca_prefix'];
+	if (! $ca_prefix && isset($config)) $ca_prefix = $config['ca_prefix'];
 
-	if (! $openssl_bin) $openssl_bin = $config['openssl_bin'];
+	if (! $openssl_bin && isset($config)) $openssl_bin = $config['openssl_bin'];
 	if (! $openssl_bin) $openssl_bin = '/usr/bin/openssl';
 
-	if (! $passwd_file) $passwd_file = $config['passwd_file'];
+	if (! $passwd_file && isset($config)) $passwd_file = $config['passwd_file'];
 	if (! $passwd_file)  $passwd_file = dirname($_SERVER['DOCUMENT_ROOT']).'/phpkipasswd';
 	
-	if (! $header_title) $header_title = $config['header_title'];
+	if (! $header_title && isset($config)) $header_title = $config['header_title'];
 	if (! $header_title) $header_title = 'Certificate Authority';
 
 	printHeader('setup');
