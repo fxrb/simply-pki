@@ -12,7 +12,7 @@ $PHP_SELF = $_SERVER['PHP_SELF'];
 
 function printHeader($withmenu="default") {
 	global $config;
-	$title = ($config['header_title']?$config['header_title']:'PHPki Certificate Authority');
+	$title = (!is_null($config) && $config['header_title']?$config['header_title']:'PHPki Certificate Authority');
 
 	switch ($withmenu) {
 	case 'public':
