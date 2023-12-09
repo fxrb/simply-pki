@@ -22,7 +22,7 @@ function flush_exec($command, $line_length=200) {
                 }
         }
         print $line."<br>\n";
-	flush;
+	flush();
 	return;
 }
 
