@@ -12,7 +12,6 @@ function CA_create_cnf($country='',$province='',$locality='',$organization='',$u
 
 	$cnf_contents = "
 HOME             = $config[home_dir] 
-RANDFILE         = $config[random]
 dir	             = $config[ca_dir]
 certs            = $config[cert_dir]
 crl_dir	         = $config[crl_dir]
@@ -518,7 +517,7 @@ function CA_create_cert($cert_type='email',$country,$province,$locality,$organiz
 		$cmd_output[] = "Creating PKCS12 format certifcate.";
 		if ($passwd) {
 			$cmd_output[] = "infile: $usercert   keyfile: $userkey   outfile: $userpfx  pass: $_passwd";
-			exec(PKCS12." -export -in '$usercert' -inkey '$userkey' -certfile '$config[cacert_pem]' -caname '$config[organization]' -out '$userpfx' -name $friendly_name -rand '$config[random]' -passin pass:$_passwd -passout pass:$_passwd  2>&1", $cmd_output, $ret);
+			exec(PKCS12." -export -in '$usercert' -inkey '$userkey' -certfile '$config[cacert_pem]' -caname '$config[organization]' -out '$userpfx' -name $friendly_name -passin pass:$_passwd -passout pass:$_passwd  2>&1", $cmd_output, $ret);
 		}
 		else {
 			$cmd_output[] = "infile: $usercert   keyfile: $userkey   outfile: $userpfx";
@@ -648,7 +647,7 @@ function CA_renew_cert($old_serial,$expiry,$passwd) {
 		$cmd_output[] = "Creating PKCS12 format certificate.";
 		if ($passwd) {
 			$cmd_output[] = "infile: $usercert   keyfile: $userkey   outfile: $userpfx  pass: $_passwd";
-			exec(PKCS12." -export -in '$usercert' -inkey '$userkey' -certfile '$config[cacert_pem]' -caname '$config[organization]' -out '$userpfx' -name $friendly_name -rand '$config[random]' -passin pass:$_passwd -passout pass:$_passwd  2>&1", $cmd_output, $ret);
+			exec(PKCS12." -export -in '$usercert' -inkey '$userkey' -certfile '$config[cacert_pem]' -caname '$config[organization]' -out '$userpfx' -name $friendly_name -passin pass:$_passwd -passout pass:$_passwd  2>&1", $cmd_output, $ret);
 		}
 		else {
 			$cmd_output[] = "infile: $usercert   keyfile: $userkey   outfile: $userpfx";

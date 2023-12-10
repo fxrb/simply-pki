@@ -1,5 +1,4 @@
 HOME			= /var/www/phpki-store
-RANDFILE		= /var/www/phpki-store/CA/.rnd
 dir			= /var/www/phpki-store/CA
 certs			= /var/www/phpki-store/CA/certs
 crl_dir			= /var/www/phpki-store/CA/crl

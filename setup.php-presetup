@@ -239,7 +239,6 @@ case 'write':
 \$config['pfx_dir']       = \$config['ca_dir']   . '/pfx';
 \$config['index']         = \$config['ca_dir']   . '/index.txt';
 \$config['serial']        = \$config['ca_dir']   . '/serial';
-\$config['random']        = \$config['ca_dir'] . '/.rnd';
 \$config['cacert_pem']    = \$config['cert_dir'] . '/cacert.pem';
 \$config['cacrl_pem']     = \$config['crl_dir'] . '/cacrl.pem';
 \$config['cacrl_der']     = \$config['crl_dir'] . '/cacrl.crl';
@@ -252,7 +251,7 @@ case 'write':
 
 define('OPENSSL',\$config['openssl_bin'].' ');
 define('X509', OPENSSL . ' x509 ');
-define('PKCS12', "RANDFILE='\$config[random]' " . OPENSSL . ' pkcs12 ');
+define('PKCS12', OPENSSL . ' pkcs12 ');
 define('CA', OPENSSL . ' ca ');
 define('REQ', OPENSSL . ' req ');
 define('CRL', OPENSSL . ' crl ');
@@ -299,7 +298,6 @@ EOS;
 	#
 	$config_txt1 = <<< EOS
 HOME			= $config[home_dir]
-RANDFILE		= $config[random]
 dir			= $config[ca_dir]
 certs			= $config[cert_dir]
 crl_dir			= $config[crl_dir]
@@ -587,7 +585,7 @@ EOS;
 	#
 	print '<p><strong>Creating 1024 bit Diffie-Hellman parameters used by OpenVPN.<br>';
 	print "Saving to $store_dir/dhparam1024.pem.</strong><br>";
-	$cmd = "openssl dhparam -rand '$config[random]' -out '$config[private_dir]/dhparam1024.pem' 1024";
+	$cmd = "openssl dhparam -out '$config[private_dir]/dhparam1024.pem' 1024";
 	print $cmd.'<br>';
 	flush();
 	flush_exec($cmd,100);
@@ -595,7 +593,7 @@ EOS;
 
 	#print '<p><strong>Creating 2048 bit Diffie-Hellman parameters used by OpenVPN.<br>';
 	#print "Saving to $store_dir/dhparam2048.pem.</strong><br>";
-	#$cmd = "openssl dhparam -rand '$config[random]' -out '$config[private_dir]/dhparam2048.pem' 2048";
+	#$cmd = "openssl dhparam -out '$config[private_dir]/dhparam2048.pem' 2048";
 	#print $cmd.'<br>';
 	#flush();
 	#flush_exec($cmd,200);
